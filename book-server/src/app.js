@@ -1,4 +1,4 @@
-console.log("Hello world")
+
 const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
@@ -10,10 +10,10 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.get("/status",(request, response) =>{
+app.post("/register",(request, response) =>{
     response.send({
-        message: "hello world"
+        message: `${request.body.email} Register has sucessful`
     })
 })
 
-app.listen(process.env.PORT || 8080)
+app.listen(process.env.PORT || 8081)
