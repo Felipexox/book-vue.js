@@ -10,11 +10,17 @@
 
     <v-toolbar-items>
       <v-btn flat
+          v-if="!$store.state.isUserLoggedIn"
           @click="navigateTo ({name: 'login'})"
       > Login </v-btn>
       <v-btn flat
+          v-if="!$store.state.isUserLoggedIn"
           @click="navigateTo ({name: 'register'})"
       >  Sign In </v-btn>
+      <v-btn flat
+          v-if="$store.state.isUserLoggedIn"
+          @click="logout"
+      >  Logout </v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -27,6 +33,11 @@ export default {
   methods: {
     navigateTo (route) {
       this.$router.push(route)
+    },
+    logout () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
+      this.$router.push({name: 'root'})
     }
   }
 }
